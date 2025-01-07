@@ -7,6 +7,7 @@ from notifications import EmailConfig, SMSConfig, NotificationService
 from printer import CustomPrinter
 from stock_checker import StockChecker
 from utils import verify_urls
+import mac_imessage
 
 
 def test_notifications(notification_service, printer):
@@ -72,8 +73,7 @@ def main():
             printer.info(f"Email notifications will be sent to {arguments.email_to}")
 
         if arguments.phone_to:
-            sms_config = SMSConfig(account_sid=TWILIO_SID, auth_token=TWILIO_TOKEN, from_number=TWILIO_FROM,
-                                   to_number=arguments.phone_to)
+            sms_config = SMSConfig(to_number=arguments.phone_to)
             printer.info(f"SMS notifications will be sent to {arguments.phone_to}")
 
         notification_service = NotificationService(email_config, sms_config)
