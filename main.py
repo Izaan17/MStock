@@ -1,13 +1,12 @@
 import argparse
 
-from config import (EMAIL_FROM, EMAIL_PASSWORD, TWILIO_SID, TWILIO_TOKEN, TWILIO_FROM)
+from config import (EMAIL_FROM, EMAIL_PASSWORD)
 from constants import MACYS_PRODUCT_URL_PREFIX, DEFAULT_CHECK_INTERVAL_IN_SECONDS
 from input import CustomInput
 from notifications import EmailConfig, SMSConfig, NotificationService
 from printer import CustomPrinter
 from stock_checker import StockChecker
 from utils import verify_urls
-import mac_imessage
 
 
 def test_notifications(notification_service, printer):
