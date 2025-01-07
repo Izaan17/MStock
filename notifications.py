@@ -50,7 +50,7 @@ class NotificationService:
             return
 
         try:
-            message = mac_imessage.send_imessage(
+            mac_imessage.send_imessage(
                 message=message,
                 phone_number=self.sms_config.to_number
             )
