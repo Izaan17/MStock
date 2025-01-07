@@ -1,8 +1,8 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from twilio.rest import Client
 from dataclasses import dataclass
+import mac_imessage
 
 @dataclass
 class EmailConfig:
@@ -14,18 +14,12 @@ class EmailConfig:
 
 @dataclass
 class SMSConfig:
-    account_sid: str = ""
-    auth_token: str = ""
-    from_number: str = ""  # Your Twilio phone number
     to_number: str = ""    # Your phone number
 
 class NotificationService:
     def __init__(self, email_config: EmailConfig = None, sms_config: SMSConfig = None):
         self.email_config = email_config
         self.sms_config = sms_config
-        self.twilio_client = None
-        if sms_config:
-            self.twilio_client = Client(sms_config.account_sid, sms_config.auth_token)
 
     def send_email(self, subject: str, body: str):
         """Send email notification"""
@@ -52,14 +46,13 @@ class NotificationService:
 
     def send_sms(self, message: str):
         """Send SMS notification"""
-        if not self.sms_config or not self.twilio_client:
+        if not self.sms_config:
             return
 
         try:
-            message = self.twilio_client.messages.create(
-                body=message,
-                from_=self.sms_config.from_number,
-                to=self.sms_config.to_number
+            mac_imessage.send_imessage(
+                message=message,
+                phone_number=self.sms_config.to_number
             )
             return True
         except Exception as e:

@@ -1,6 +1,6 @@
 import argparse
 
-from config import (EMAIL_FROM, EMAIL_PASSWORD, TWILIO_SID, TWILIO_TOKEN, TWILIO_FROM)
+from config import (EMAIL_FROM, EMAIL_PASSWORD)
 from constants import MACYS_PRODUCT_URL_PREFIX, DEFAULT_CHECK_INTERVAL_IN_SECONDS
 from input import CustomInput
 from notifications import EmailConfig, SMSConfig, NotificationService
@@ -72,8 +72,7 @@ def main():
             printer.info(f"Email notifications will be sent to {arguments.email_to}")
 
         if arguments.phone_to:
-            sms_config = SMSConfig(account_sid=TWILIO_SID, auth_token=TWILIO_TOKEN, from_number=TWILIO_FROM,
-                                   to_number=arguments.phone_to)
+            sms_config = SMSConfig(to_number=arguments.phone_to)
             printer.info(f"SMS notifications will be sent to {arguments.phone_to}")
 
         notification_service = NotificationService(email_config, sms_config)
