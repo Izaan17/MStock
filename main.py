@@ -1,8 +1,6 @@
 import argparse
-from config import (
-    EMAIL_FROM, EMAIL_PASSWORD,
-    TWILIO_SID, TWILIO_TOKEN, TWILIO_FROM
-)
+
+from config import (EMAIL_FROM, EMAIL_PASSWORD, TWILIO_SID, TWILIO_TOKEN, TWILIO_FROM)
 from constants import MACYS_PRODUCT_URL_PREFIX, DEFAULT_CHECK_INTERVAL_IN_SECONDS
 from input import CustomInput
 from notifications import EmailConfig, SMSConfig, NotificationService
@@ -49,23 +47,16 @@ def main():
     parser.add_argument('urls', nargs='*', help='The urls of products to monitor.')
 
     # Monitoring flags
-    parser.add_argument('-i', '--interval',
-                        type=int,
-                        default=DEFAULT_CHECK_INTERVAL_IN_SECONDS,
+    parser.add_argument('-i', '--interval', type=int, default=DEFAULT_CHECK_INTERVAL_IN_SECONDS,
                         help='Check interval in seconds')
-    parser.add_argument('-v', '--verbose',
-                        action='store_true',
+    parser.add_argument('-v', '--verbose', action='store_true',
                         help='Enable verbose output with detailed product information')
-    parser.add_argument('-t', '--test',
-                        action='store_true',
-                        help='Test email and SMS notifications')
+    parser.add_argument('-t', '--test', action='store_true', help='Test email and SMS notifications')
 
     # Notification arguments
     notification_group = parser.add_argument_group('Notifications')
-    notification_group.add_argument('--email-to',
-                                    help='Email address to send notifications to')
-    notification_group.add_argument('--phone-to',
-                                    help='Phone number to send SMS notifications to')
+    notification_group.add_argument('--email-to', help='Email address to send notifications to')
+    notification_group.add_argument('--phone-to', help='Phone number to send SMS notifications to')
 
     arguments = parser.parse_args()
 
@@ -76,20 +67,13 @@ def main():
         sms_config = None
 
         if arguments.email_to:
-            email_config = EmailConfig(
-                sender_email=EMAIL_FROM,
-                sender_password=EMAIL_PASSWORD,
-                recipient_email=arguments.email_to
-            )
+            email_config = EmailConfig(sender_email=EMAIL_FROM, sender_password=EMAIL_PASSWORD,
+                                       recipient_email=arguments.email_to)
             printer.info(f"Email notifications will be sent to {arguments.email_to}")
 
         if arguments.phone_to:
-            sms_config = SMSConfig(
-                account_sid=TWILIO_SID,
-                auth_token=TWILIO_TOKEN,
-                from_number=TWILIO_FROM,
-                to_number=arguments.phone_to
-            )
+            sms_config = SMSConfig(account_sid=TWILIO_SID, auth_token=TWILIO_TOKEN, from_number=TWILIO_FROM,
+                                   to_number=arguments.phone_to)
             printer.info(f"SMS notifications will be sent to {arguments.phone_to}")
 
         notification_service = NotificationService(email_config, sms_config)
@@ -123,9 +107,7 @@ def main():
 
         # Initialize stock checker and start monitoring
         checker = StockChecker(printer=printer, notification_service=notification_service)
-        checker.check_stock(valid_urls,
-                            interval=arguments.interval,
-                            verbose=arguments.verbose)
+        checker.check_stock(valid_urls, interval=arguments.interval, verbose=arguments.verbose)
     else:
         printer.error('No URLs provided')
         printer.info('Example usage:')
