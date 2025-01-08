@@ -1,14 +1,6 @@
-class CustomInput:
-    # ANSI color codes for terminal output
-    COLORS = {
-        'red': '\033[91m',
-        'green': '\033[92m',
-        'yellow': '\033[93m',
-        'blue': '\033[94m',
-        'purple': '\033[95m',
-        'reset': '\033[0m'
-    }
+from constants import COLORS
 
+class CustomInput:
     def __init__(self, use_colors=True):
         self.use_colors = use_colors
 
@@ -50,7 +42,7 @@ class CustomInput:
 
     def _format_prefix(self, prefix, color):
         if self.use_colors:
-            return f"{self.COLORS[color]}{prefix}{self.COLORS['reset']}"
+            return f"{COLORS[color]}{prefix}{COLORS['reset']}"
         return prefix
 
 

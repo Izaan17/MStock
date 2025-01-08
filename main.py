@@ -66,6 +66,8 @@ def main():
         email_config = None
         sms_config = None
 
+        printer.section('Notification Information')
+
         if arguments.email_to:
             email_config = EmailConfig(sender_email=EMAIL_FROM, sender_password=EMAIL_PASSWORD,
                                        recipient_email=arguments.email_to)
@@ -74,6 +76,8 @@ def main():
         if arguments.phone_to:
             sms_config = SMSConfig(to_number=arguments.phone_to)
             printer.info(f"SMS notifications will be sent to {arguments.phone_to}")
+
+        print()  # Seperator
 
         notification_service = NotificationService(email_config, sms_config)
 
