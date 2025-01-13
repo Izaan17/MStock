@@ -169,17 +169,10 @@ class StockChecker:
                 if product_info:
                     product_info.status = "Out of Stock"
                 return False, product_info
-
-            # Check for add to bag button
-            add_to_bag = soup.find('button', {'data-auto-id': 'add-to-bag'})
-            if add_to_bag and not add_to_bag.get('disabled'):
+            else:
                 if product_info:
                     product_info.status = "In Stock"
                 return True, product_info
-
-            if product_info:
-                product_info.status = "Unknown"
-            return None, product_info
 
         except requests.RequestException as e:
             self.printer.error(f"Error checking stock: {e}")
