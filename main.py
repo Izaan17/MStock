@@ -16,7 +16,7 @@ def test_notifications(notification_service, printer):
         return False
 
     test_subject = "🧪 Test Notification"
-    test_message = "This is a test notification from your Macy's Stock Checker application."
+    test_message = "This is a test notification from the MStock program."
     success = True
 
     if notification_service.email_config:
