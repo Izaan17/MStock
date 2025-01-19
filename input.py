@@ -1,5 +1,6 @@
 from constants import COLORS
 
+
 class CustomInput:
     def __init__(self, use_colors=True):
         self.use_colors = use_colors
@@ -34,12 +35,6 @@ class CustomInput:
             except ValueError:
                 print(self._format_prefix("[-]", 'red') + " Please enter a valid number")
 
-    def password(self, message):
-        """Password input (hidden input)"""
-        import getpass
-        formatted_prefix = self._format_prefix("[?]", 'purple')
-        return getpass.getpass(f"{formatted_prefix} {message}: ")
-
     def _format_prefix(self, prefix, color):
         if self.use_colors:
             return f"{COLORS[color]}{prefix}{COLORS['reset']}"
@@ -64,7 +59,3 @@ if __name__ == "__main__":
     options = ["Option A", "Option B", "Option C"]
     choice = input_handler.select("Choose an option", options)
     print(f"You selected: {choice}")
-
-    # Password
-    password = input_handler.password("Enter your password")
-    print("Password received (hidden)")
