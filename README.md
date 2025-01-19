@@ -181,6 +181,7 @@ The tool handles various scenarios gracefully:
     - Check your spam folder for test notifications
 
 2. SMS Notification Issues:
+    - You must have an icloud account logged in the computer using the script
     - Ensure you're running on macOS for iMessage support
     - Verify the phone number format (should include country code)
     - Sometimes messages will fail to send if the iMessage app is not open
