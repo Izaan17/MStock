@@ -28,14 +28,14 @@ it can notify you via email and SMS notifications.
 
 1. Clone the repository:
 
-```bash
-git clone [repository-url]
+```shell
+git clone https://github.com/Izaan17/MStock.git
 cd mstock
 ```
 
 2. Install required packages:
 
-```bash
+```shell
 pip install -r requirements.txt
 ```
 
@@ -59,13 +59,13 @@ For email configuration, you'll need:
 
 Basic usage:
 
-```bash
+```shell
 python main.py "https://www.macys.com/shop/product/your-product-url"
 ```
 
 Multiple products:
 
-```bash
+```shell
 python main.py "url1" "url2" "url3"
 ```
 
@@ -81,7 +81,7 @@ python main.py "url1" "url2" "url3"
 Before starting long-term monitoring, it's recommended to test your notification settings. Use the `-t` or `--test`
 argument to send test notifications:
 
-```bash
+```shell
 # Test both email and SMS notifications
 python main.py -t --email-to your@email.com --phone-to "+1234567890"
 
@@ -116,19 +116,19 @@ If any test fails, you'll see detailed error messages to help troubleshoot the i
 
 Monitor a single product with email notifications:
 
-```bash
+```shell
 python main.py "https://www.macys.com/shop/product/your-product-url" --email-to your@email.com
 ```
 
 Monitor multiple products with both email and SMS notifications:
 
-```bash
+```shell
 python main.py "url1" "url2" --email-to your@email.com --phone-to "+1234567890" -i 120
 ```
 
 Test notifications setup:
 
-```bash
+```shell
 python main.py -t --email-to your@email.com --phone-to "+1234567890"
 ```
 
